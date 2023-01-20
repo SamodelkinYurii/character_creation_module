@@ -13,7 +13,11 @@ def attack(char_name: str, char_class: str) -> str:
                 f'{5 + randint(-3, -1)}')
 
 
+<<<<<<< HEAD
 def defence(char_name: str, char_class: str) -> str:
+=======
+def defence(char_name, char_class):
+>>>>>>> 0b90a0caa15db109cb69d3d0d4f6c223a4954ab6
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
     if char_class == 'mage':
@@ -22,7 +26,11 @@ def defence(char_name: str, char_class: str) -> str:
         return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
 
 
+<<<<<<< HEAD
 def special(char_name: str, char_class: str) -> str:
+=======
+def special(char_name, char_class):
+>>>>>>> 0b90a0caa15db109cb69d3d0d4f6c223a4954ab6
     if char_class == 'warrior':
         return (f'{char_name} применил специальное умение '
                 f'«Выносливость {80 + 25}»')
@@ -32,7 +40,11 @@ def special(char_name: str, char_class: str) -> str:
         return (f'{char_name} применил специальное умение «Защита {10 + 30}»')
 
 
+<<<<<<< HEAD
 def start_training(char_name: str, char_class: str) -> str:
+=======
+def start_training(char_name, char_class):
+>>>>>>> 0b90a0caa15db109cb69d3d0d4f6c223a4954ab6
     if char_class == 'warrior':
         print(f'{char_name}, ты Воитель — отличный боец ближнего боя.')
     if char_class == 'mage':
@@ -57,9 +69,15 @@ def start_training(char_name: str, char_class: str) -> str:
     return 'Тренировка окончена.'
 
 
+<<<<<<< HEAD
 def choice_char_class() -> str:
     approve_choice: str = ''
     char_class: str = ''
+=======
+def choice_char_class():
+    approve_choice = None
+    char_class = None
+>>>>>>> 0b90a0caa15db109cb69d3d0d4f6c223a4954ab6
     while approve_choice != 'y':
         char_class = input('Введи название персонажа, '
                            'за которого хочешь играть: '
