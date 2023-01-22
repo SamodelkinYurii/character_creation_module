@@ -7,6 +7,7 @@ DEFAULT_STAMINA = 80
 class Character():
     
     BRIEF_DESC_CHAR_CLASS = 'отважный любитель приключений'
+    START_TR_CHAR_CLASS = 'великий воитель'
     RANGE_VALUE_ATTACK = (1, 3)
     RANGE_VALUE_DEFENCE = (1, 5)
     SPECIAL_BUFF = 15
@@ -58,12 +59,31 @@ class Character():
             approve_choice = input('Нажми (Y), чтобы подтвердить выбор, '
                                    'или любую другую кнопку, '
                                    'чтобы выбрать другого персонажа ').lower()
-        return char_class 
+        return char_class
 
+
+    def start_training(character):
+        
+        commands = {'attack': character.attack, 'defence': character.defence, 'special': character.special}
+        print(f'{character.name} {character.START_TR_CHAR_CLASS}')
+        print('Потренируйся управлять своими навыками.')
+        print('Введи одну из команд: attack — чтобы атаковать противника, '
+              'defence — чтобы блокировать атаку противника или '
+              'special — чтобы использовать свою суперсилу.')
+        print('Если не хочешь тренироваться, введи команду skip.')
+        cmd = None
+        while cmd != 'skip':
+            cmd = input('Введи команду: ')
+            if cmd in commands:
+                print(commands[cmd]())
+
+        return 'Тренировка окончена.'
+        
 class Warrior(Character):
 
     BRIEF_DESC_CHAR_CLASS = (' дерзкий воин ближнего боя. '
                              'Сильный, выносливый и отважный')
+    START_TR_CHAR_CLASS = (' , ты Воитель — великий мастер ближнего боя.')
     RANGE_VALUE_ATTACK = (3, 5)
     RANGE_VALUE_DEFENCE = (5, 10)
     SPECIAL_BUFF = DEFAULT_STAMINA + 25
@@ -74,6 +94,7 @@ class Mage(Character):
 
     BRIEF_DESC_CHAR_CLASS = (' находчивый воин дальнего боя. '
                              'Обладает высоким интеллектом')
+    START_TR_CHAR_CLASS = (', ты Маг — превосходный укротитель стихий.')
     RANGE_VALUE_ATTACK = (5, 10)
     RANGE_VALUE_DEFENCE = (-2, 2)
     SPECIAL_BUFF = DEFAULT_ATTACK + 40
@@ -83,12 +104,23 @@ class Healer(Character):
 
     BRIEF_DESC_CHAR_CLASS = (' могущественный заклинатель. '
                              'Черпает силы из природы, веры и духов')
+    START_TR_CHAR_CLASS = (', ты Лекарь — чародей, способный исцелять раны.')
     RANGE_VALUE_ATTACK = (-3, -1)
     RANGE_VALUE_DEFENCE = (2, 5)
     SPECIAL_BUFF = DEFAULT_DEFENCE + 30
     SPECIAL_SKILL = 'Защита' 
 
 
-warrior = Warrior('Кодослав')
-print(warrior)
-print(warrior.attack())
+def main():
+    print('Приветствую тебя, искатель приключений!')
+    print('Прежде чем начать игру...')
+    char_name: str = input('...назови себя: ')
+    print(f'Здравствуй, {char_name}! '
+          'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
+    print('Ты можешь выбрать один из трёх путей силы:')
+    print('Воитель, Маг, Лекарь')
+    char_class = Character.choice_char_class(char_name)
+    print(Character.start_training(char_class))
+
+
+main()
