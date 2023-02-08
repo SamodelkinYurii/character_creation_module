@@ -1,11 +1,12 @@
 from random import randint
 
 DEFAULT_ATTACK = 5
-DEFAULT_DEFENCE = 10 
+DEFAULT_DEFENCE = 10
 DEFAULT_STAMINA = 80
 
+
 class Character():
-    
+
     BRIEF_DESC_CHAR_CLASS = 'отважный любитель приключений'
     START_TR_CHAR_CLASS = 'великий воитель'
     RANGE_VALUE_ATTACK = (1, 3)
@@ -16,42 +17,43 @@ class Character():
     # Объявляем конструктор класса.
     def __init__(self, name):
         self.name = name
-    
-   # Объявляем метод атаки
+    # Объявляем метод атаки
+
     def attack(self):
         # Вместо числа 5 теперь используется константа DEFAULT_ATTACK.
         value_attack = DEFAULT_ATTACK + randint(*self.RANGE_VALUE_ATTACK)
         return (f'{self.name} нанёс противнику урон, равный {value_attack}')
-    
+
     # Объявляем метод защиты.
     def defence(self):
         # Вычисляем значение защиты в переменной value_defence.
         value_defence = DEFAULT_DEFENCE + randint(*self.RANGE_VALUE_DEFENCE)
         return (f'{self.name} блокировал {value_defence} ед. урона.')
 
-    
     # Объявляем метод специального умения.
     def special(self):
         # Здесь описано тело метода special().
         return (f'{self.name} применил специальное умение '
                 f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}".')
 
-
     def __str__(self):
-        return f'{self.__class__.__name__} - {self.BRIEF_DESC_CHAR_CLASS}.' 
+        return f'{self.__class__.__name__} - {self.BRIEF_DESC_CHAR_CLASS}.'
 
-    
     def choice_char_class(char_name: str):
         """Возвращает строку с выбранным классом персонажа."""
 
-    # Добавили словарь, в котором соотносится ввод пользователя и класс персонажа.
-        game_classes = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
-    
-        approve_choice: str  = None
-    
+    # Добавили словарь, в котором соотносится ввод
+    # пользователя и класс персонажа.
+        game_classes = {'warrior': Warrior,
+                        'mage': Mage,
+                        'healer': Healer}
+
+        approve_choice: str = None
+
         while approve_choice != 'y':
             selected_class = input('Введи название персонажа, '
-                                   'за которого хочешь играть: Воитель — warrior, '
+                                   'за которого хочешь играть: '
+                                   'Воитель — warrior, '
                                    'Маг — mage, Лекарь — healer: ')
             char_class: Character = game_classes[selected_class](char_name)
             # Вывели в терминал описание персонажа.
@@ -61,10 +63,11 @@ class Character():
                                    'чтобы выбрать другого персонажа ').lower()
         return char_class
 
-
     def start_training(character):
-        
-        commands = {'attack': character.attack, 'defence': character.defence, 'special': character.special}
+
+        commands = {'attack': character.attack,
+                    'defence': character.defence,
+                    'special': character.special}
         print(f'{character.name} {character.START_TR_CHAR_CLASS}')
         print('Потренируйся управлять своими навыками.')
         print('Введи одну из команд: attack — чтобы атаковать противника, '
@@ -78,7 +81,8 @@ class Character():
                 print(commands[cmd]())
 
         return 'Тренировка окончена.'
-        
+
+
 class Warrior(Character):
 
     BRIEF_DESC_CHAR_CLASS = (' дерзкий воин ближнего боя. '
@@ -88,7 +92,7 @@ class Warrior(Character):
     RANGE_VALUE_DEFENCE = (5, 10)
     SPECIAL_BUFF = DEFAULT_STAMINA + 25
     SPECIAL_SKILL = 'Выносливость'
-    
+
 
 class Mage(Character):
 
@@ -100,6 +104,7 @@ class Mage(Character):
     SPECIAL_BUFF = DEFAULT_ATTACK + 40
     SPECIAL_SKILL = 'Атака'
 
+
 class Healer(Character):
 
     BRIEF_DESC_CHAR_CLASS = (' могущественный заклинатель. '
@@ -108,7 +113,7 @@ class Healer(Character):
     RANGE_VALUE_ATTACK = (-3, -1)
     RANGE_VALUE_DEFENCE = (2, 5)
     SPECIAL_BUFF = DEFAULT_DEFENCE + 30
-    SPECIAL_SKILL = 'Защита' 
+    SPECIAL_SKILL = 'Защита'
 
 
 def main():
